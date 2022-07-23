@@ -17,14 +17,9 @@ SECRET_KEY = str(os.getenv("SECRET_KEY"))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
-    # My sites
-    "api",
     # Django Rest Authentication
     "rest_framework",
     "rest_framework.authtoken",
@@ -36,6 +31,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # My sites
+    "api",
 ]
 
 MIDDLEWARE = [
@@ -50,6 +47,12 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+]
+ALLOWED_HOSTS = ['*']
 
 ROOT_URLCONF = 'clubDelHardApi.urls'
 
@@ -134,3 +137,6 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 10,
 }
+
+MEDIA_ROOT = os.path.join(BASE_DIR, '/media/')
+MEDIA_URL = '/media/'
