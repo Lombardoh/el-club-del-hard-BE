@@ -5,7 +5,7 @@ from .views import ProductViewSet, WishlistViewSet
 
 router = routers.DefaultRouter()
 router.register("products", ProductViewSet)
-router.register("wishlists", WishlistViewSet)
+router.register("wishlist", WishlistViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
