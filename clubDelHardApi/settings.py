@@ -32,8 +32,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # My sites
-    "api",
-    "accounts"
+    "accounts",
+    "store",
 ]
 
 AUTH_USER_MODEL = 'accounts.Account'

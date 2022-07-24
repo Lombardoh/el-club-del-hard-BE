@@ -1,5 +1,4 @@
 from django.db import models
-from accounts.models import Account
 
 class Product(models.Model):
     name = models.CharField(max_length=100)
@@ -10,7 +9,3 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-
-class WishList(models.Model):
-    account = models.ForeignKey(Account, related_name='wishlist', on_delete=models.CASCADE)
-    products = models.ForeignKey(Product, related_name='products', on_delete=models.CASCADE)
