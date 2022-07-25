@@ -1,19 +1,21 @@
-
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from accounts.models import WishList
-from accounts.api.serializers import WishlistSerializer
+from accounts.models import Wishlist, ProductInWishlist
+from accounts.api.serializers import WishlistSerializer, ProductInWishlistSerializer
 from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
 from accounts.models import Account
 
+class ProductInWishlistSerializerViewSet(viewsets.ModelViewSet):
+    queryset = ProductInWishlist.objects.all()
+    serializer_class = ProductInWishlistSerializer
+
 class WishlistViewSet(viewsets.ModelViewSet):
-    queryset = WishList.objects.all()
+    queryset = Wishlist.objects.all()
     serializer_class = WishlistSerializer
 
 @api_view(['GET', ])
@@ -21,8 +23,9 @@ class WishlistViewSet(viewsets.ModelViewSet):
 def get_wishlist(request, token):
     user = Token.objects.get(key=token).user
     account = Account.objects.get(email=user)
-    wishlist = WishList.objects.get(account=account)
-    serializer = WishlistSerializer(wishlist, many=True)
+    wishlist = Wishlist.objects.get(account=account)
+    serializer = WishlistSerializer(wishlist, many=False)
+    print(serializer.data)
     return Response(serializer.data)
 
     

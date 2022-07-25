@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from store.models import Product
 
 from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
+
+from store.models import Product
 
 class MyAccountManager(BaseUserManager):
 	def create_user(self, email, username, password=None):
@@ -68,6 +69,10 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 		Token.objects.create(user=instance)
 
 
-class WishList(models.Model):
-    account = models.ForeignKey(Account, related_name='account', on_delete=models.CASCADE)
-    products = models.ForeignKey(Product, related_name='products', on_delete=models.CASCADE)
+class Wishlist(models.Model):
+	account = models.OneToOneField(Account, related_name='account', on_delete=models.CASCADE)
+	
+
+class ProductInWishlist(models.Model):
+	Wishlist = models.ForeignKey(Wishlist, related_name='wishlist', on_delete=models.CASCADE)
+	products = models.ForeignKey(Product, related_name='products', on_delete=models.SET_NULL, blank=True, null=True)
