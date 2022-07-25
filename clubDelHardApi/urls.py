@@ -7,8 +7,11 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls')),
-    path('auth/', obtain_auth_token)
+    path('accounts/', include('accounts.urls')),
+
+    #REST FRAMEWORK URLS
+    path('api/accounts/', include('accounts.api.urls'), name='accounts_api'),
+    path('api/store/', include('store.api.urls'), name='strore_api'),
 ]
 
 if settings.DEBUG:  # new

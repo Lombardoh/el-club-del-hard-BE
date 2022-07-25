@@ -32,8 +32,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # My sites
-    "api",
+    "accounts",
+    "store",
 ]
+
+AUTH_USER_MODEL = 'accounts.Account'
+
 
 MIDDLEWARE = [
     # corsheaders
@@ -129,6 +133,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
+        # "rest_framework.permissions.IsAuthenticated",
         "rest_framework.permissions.AllowAny",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
