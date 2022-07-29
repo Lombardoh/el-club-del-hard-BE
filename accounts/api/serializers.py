@@ -6,16 +6,15 @@ from store.models import Product
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('pk', 'name', 'price', 'image', 'description')
+        fields = ('pk', 'name', 'price', 'image', 'description', 'label')
 
 class ProductInWishlistSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(many=False)
+    product = ProductSerializer(many=False)
     class Meta:
         model = ProductInWishlist
         fields = '__all__'
 
 class WishlistSerializer(serializers.ModelSerializer):
-    products = ProductInWishlistSerializer(many=True, read_only=True)
     class Meta:
         model = Wishlist
-        fields = ['id', 'products']
+        fields = '__all__'
