@@ -72,7 +72,12 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 class Wishlist(models.Model):
 	account = models.OneToOneField(Account, related_name='account', on_delete=models.CASCADE)
 	
+	def __str__(self):
+		return self.account.username
 
 class ProductInWishlist(models.Model):
 	Wishlist = models.ForeignKey(Wishlist, related_name='wishlist', on_delete=models.CASCADE)
-	products = models.ForeignKey(Product, related_name='products', on_delete=models.SET_NULL, blank=True, null=True)
+	product = models.ForeignKey(Product, related_name='product', on_delete=models.SET_NULL, blank=True, null=True)
+	quantity = models.IntegerField(default=1)
+
+	
