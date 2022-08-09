@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from accounts.models import Account, Wishlist, ProductInWishlist
+from accounts.models import Account, Wishlist
+from store.models import Product
 
 class ProductInline(admin.TabularInline):
-	model = ProductInWishlist
+	model = Product
 
 class AccountAdmin(UserAdmin):
 	list_display = ('pk', 'email','username','date_joined', 'last_login', 'is_admin','is_staff')
@@ -15,11 +16,9 @@ class AccountAdmin(UserAdmin):
 	fieldsets = ()
 
 class WishlistAdmin(admin.ModelAdmin):
-	list_display = ('pk', 'account')
-	search_fields = ('pk', 'account')
-	inlines = [ProductInline,]
-
-
+	list_display = ('pk',)
+	inlines = [ProductInline]
+	
 
 admin.site.register(Account, AccountAdmin)
 admin.site.register(Wishlist, WishlistAdmin)

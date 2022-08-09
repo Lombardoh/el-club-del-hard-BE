@@ -6,8 +6,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
-from store.models import Product
-
 class MyAccountManager(BaseUserManager):
 	def create_user(self, email, username, password=None):
 		if not email:
@@ -71,13 +69,6 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
 
 class Wishlist(models.Model):
 	account = models.OneToOneField(Account, related_name='account', on_delete=models.CASCADE)
-	
+
 	def __str__(self):
 		return self.account.username
-
-class ProductInWishlist(models.Model):
-	Wishlist = models.ForeignKey(Wishlist, related_name='wishlist', on_delete=models.CASCADE)
-	product = models.ForeignKey(Product, related_name='product', on_delete=models.SET_NULL, blank=True, null=True)
-	quantity = models.IntegerField(default=1)
-
-	
