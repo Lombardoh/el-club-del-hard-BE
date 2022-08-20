@@ -29,7 +29,6 @@ def registration_view(request):
 
 @api_view(['POST'])
 def login_view(request):
-    print(request.data)
     if request.method == 'POST':
         serializer = LoginSerializer(data=request.data)
         data = {}

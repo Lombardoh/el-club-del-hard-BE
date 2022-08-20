@@ -12,6 +12,7 @@ urlpatterns = [
     #REST FRAMEWORK URLS
     path('api/accounts/', include('accounts.api.urls'), name='accounts_api'),
     path('api/store/', include('store.api.urls'), name='strore_api'),
+    path('api/cart/', include('cart.api.urls'), name='cart_api'),
 ]
 
 if settings.DEBUG:  # new

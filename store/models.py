@@ -1,5 +1,3 @@
-from email.policy import default
-from itertools import product
 from django.db import models
 from accounts.models import Wishlist
 
