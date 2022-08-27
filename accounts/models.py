@@ -37,6 +37,15 @@ class MyAccountManager(BaseUserManager):
 class Account(AbstractBaseUser):
 	email 					= models.EmailField(verbose_name="email", max_length=60, unique=True)
 	username 				= models.CharField(max_length=30, unique=True)
+	first_name 				= models.CharField(max_length=30,null=True, blank=True)
+	last_name				= models.CharField(max_length=30,null=True, blank=True)
+	province				= models.CharField(max_length=30,null=True, blank=True)
+	street					= models.CharField(max_length=30,null=True, blank=True)
+	city					= models.CharField(max_length=30,null=True, blank=True)
+	neighborhood			= models.CharField(max_length=30,null=True, blank=True)
+	street_number			= models.IntegerField(null=True, blank=True)
+	postal_code				= models.IntegerField(null=True, blank=True)
+	phone_number			= models.IntegerField(null=True, blank=True)
 	date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
 	last_login				= models.DateTimeField(verbose_name='last login', auto_now=True)
 	is_admin				= models.BooleanField(default=False)
@@ -65,10 +74,3 @@ class Account(AbstractBaseUser):
 def create_auth_token(sender, instance=None, created=False, **kwargs):
 	if created:
 		Token.objects.create(user=instance)
-
-
-class Wishlist(models.Model):
-	account = models.OneToOneField(Account, related_name='account', on_delete=models.CASCADE)
-
-	def __str__(self):
-		return self.account.username
