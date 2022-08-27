@@ -15,5 +15,3 @@ class CartSerializer(serializers.ModelSerializer):
         total = 0
         total = total + int(obj.quantity) * float(obj.product.price)
         return total
-
-    

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from accounts.models import Account, Wishlist
+from accounts.models import Account
 from store.models import Product
 
 class ProductInline(admin.TabularInline):
@@ -15,10 +15,4 @@ class AccountAdmin(UserAdmin):
 	list_filter = ()
 	fieldsets = ()
 
-class WishlistAdmin(admin.ModelAdmin):
-	list_display = ('pk',)
-	inlines = [ProductInline]
-	
-
 admin.site.register(Account, AccountAdmin)
-admin.site.register(Wishlist, WishlistAdmin)

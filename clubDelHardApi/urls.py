@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/accounts/', include('accounts.api.urls'), name='accounts_api'),
     path('api/store/', include('store.api.urls'), name='strore_api'),
     path('api/cart/', include('cart.api.urls'), name='cart_api'),
+    path('api/orders/', include('orders.api.urls'), name='orders_api'),
 ]
 
 if settings.DEBUG:  # new
