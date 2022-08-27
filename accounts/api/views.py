@@ -3,8 +3,6 @@ from accounts.models import Account
 from accounts.api.serializers import AccountSerializer
 from rest_framework.response import Response
 from rest_framework import status
-from django.forms.models import model_to_dict
-import json
 
 class AccountViewSet(viewsets.ModelViewSet):
     queryset = Account.objects.all()

@@ -23,7 +23,7 @@ class CartViewSet(viewsets.ModelViewSet):
         product = Product.objects.get(id = request.data['product']) 
         quantity = request.data['quantity']
         try:
-            cart = Cart.objects.get(product=product)
+            cart = Cart.objects.get(product=product, account=request.user)
             cart.quantity += int(quantity)
             if cart.quantity < 1 or quantity == 0:
                 cart.delete()
