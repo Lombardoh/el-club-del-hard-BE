@@ -3,9 +3,6 @@ from django.contrib.auth.admin import UserAdmin
 from accounts.models import Account
 from store.models import Product
 
-class ProductInline(admin.TabularInline):
-	model = Product
-
 class AccountAdmin(UserAdmin):
 	list_display = ('pk', 'email','username','date_joined', 'last_login', 'is_admin','is_staff')
 	search_fields = ('pk', 'email','username',)

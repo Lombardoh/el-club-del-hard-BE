@@ -43,7 +43,6 @@ class Account(AbstractBaseUser):
 	street					= models.CharField(max_length=30,null=True, blank=True)
 	city					= models.CharField(max_length=30,null=True, blank=True)
 	neighborhood			= models.CharField(max_length=30,null=True, blank=True)
-	street_number			= models.IntegerField(null=True, blank=True)
 	postal_code				= models.IntegerField(null=True, blank=True)
 	phone_number			= models.IntegerField(null=True, blank=True)
 	date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)

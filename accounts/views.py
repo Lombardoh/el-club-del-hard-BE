@@ -54,7 +54,7 @@ def login_view(request):
             
             return Response(data)
         else:
-            data = serializer.errors 
-            return Response(data, status=status.HTTP_400_BAD_REQUEST)
+            data['message'] = 'La combinación email/contraseña es incorrecta.'
+            return Response(data, status=status.HTTP_404_NOT_FOUND)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)

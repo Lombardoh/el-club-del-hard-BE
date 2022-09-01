@@ -16,7 +16,6 @@ class AccountViewSet(viewsets.ModelViewSet):
         return Response(data, status=status.HTTP_200_OK)
 
     def put(self, request):
-        print(request.data['data'])
         if request.method == 'PUT':
             serializer = AccountSerializer(request.data['data'])
             data = serializer.data
