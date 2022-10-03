@@ -1,4 +1,4 @@
-from types import CoroutineType
+from django.core.mail import send_mail
 from rest_framework import viewsets
 from accounts.models import Account
 from orders.api.serializers import OrderSerializer
@@ -40,6 +40,13 @@ class OrderViewSet(viewsets.ModelViewSet):
                     total +=item.total()
                 order.products_cost = total
                 order.save()
+            send_mail(
+                'Mail de prueba',
+                'test.',
+                'clubdelhard@reply.com',
+                ['clubdelhard@gmail.com', 'lombardo.h@hotmail.com'],
+                fail_silently=False,
+            )
             return Response(status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
