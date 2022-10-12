@@ -30,7 +30,7 @@ class OrderViewSet(viewsets.ModelViewSet):
             cart = Cart.objects.filter(account=request.user)
             if(cart):
                 total=0
-                order = create_order(account, 123, 'transferencia', 'no data')
+                order = create_order(account, 0, 'transferencia', 'no data')
                 for item in cart:
                     ProductInOrder.objects.create(
                         product=item.product,
@@ -41,10 +41,10 @@ class OrderViewSet(viewsets.ModelViewSet):
                 order.products_cost = total
                 order.save()
             send_mail(
-                'Mail de prueba',
-                'test.',
+                'Se ha realizado una compra',
+                'El usuario {} ha realizado una compra'.format(account),
                 'clubdelhard@reply.com',
-                ['lombardo.h@hotmail.com'],
+                ['clubdelhard@gmail.com '],
                 fail_silently=False,
             )
             return Response(status=status.HTTP_200_OK)
