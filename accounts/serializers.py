@@ -1,8 +1,12 @@
+import os
 from rest_framework import serializers
 from accounts.models import Account
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.core.mail import send_mail
 
+SITE_URL = str(os.getenv("SITE_URL"))
 
 class RegistrationSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
@@ -48,3 +52,32 @@ class LoginSerializer(serializers.Serializer):
             'username': self.context['user'].username
         }
         return data
+
+class ResetPasswordEmailRequestSerializer(serializers.Serializer):
+  email = serializers.EmailField(min_length=10)
+
+  class Meta:
+    fields = ['email']
+
+  def validate(self, data):
+    try:
+      email=data['email']
+      user = Account.objects.get(email=email)
+      token = PasswordResetTokenGenerator().make_token(user)
+      if Account.objects.filter(email=email).exists():        
+        reset_url = SITE_URL + 'password-reset/?token=' + token
+        body = """Se ha solicitado un recupero de contraseña para tu cuenta.\n
+        Para cambiar tu contraseña has click en el siguiente link: \n
+        {} \n
+        Si no fuiste tu por favor ignora este correo.""".format(reset_url)
+        send_mail(
+                'Recupera tu contraseña',
+                body,
+                'clubdelhard@reply.com',
+                [email],
+                fail_silently=False,
+            )
+      return data
+    except:
+      pass
+    return super().validate(data)

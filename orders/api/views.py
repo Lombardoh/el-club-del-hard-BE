@@ -44,7 +44,7 @@ class OrderViewSet(viewsets.ModelViewSet):
                 'Mail de prueba',
                 'test.',
                 'clubdelhard@reply.com',
-                ['clubdelhard@gmail.com', 'lombardo.h@hotmail.com'],
+                ['lombardo.h@hotmail.com'],
                 fail_silently=False,
             )
             return Response(status=status.HTTP_200_OK)

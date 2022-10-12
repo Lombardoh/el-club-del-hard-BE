@@ -37,20 +37,20 @@ class MyAccountManager(BaseUserManager):
 class Account(AbstractBaseUser):
 	email 					= models.EmailField(verbose_name="email", max_length=60, unique=True)
 	username 				= models.CharField(max_length=30, unique=True)
-	first_name 				= models.CharField(max_length=30,null=True, blank=True)
+	first_name 			= models.CharField(max_length=30,null=True, blank=True)
 	last_name				= models.CharField(max_length=30,null=True, blank=True)
 	province				= models.CharField(max_length=30,null=True, blank=True)
 	street					= models.CharField(max_length=30,null=True, blank=True)
-	city					= models.CharField(max_length=30,null=True, blank=True)
-	neighborhood			= models.CharField(max_length=30,null=True, blank=True)
-	postal_code				= models.IntegerField(null=True, blank=True)
-	phone_number			= models.IntegerField(null=True, blank=True)
-	date_joined				= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
-	last_login				= models.DateTimeField(verbose_name='last login', auto_now=True)
+	city					  = models.CharField(max_length=30,null=True, blank=True)
+	neighborhood		= models.CharField(max_length=30,null=True, blank=True)
+	postal_code			= models.IntegerField(null=True, blank=True)
+	phone_number		= models.IntegerField(null=True, blank=True)
+	date_joined			= models.DateTimeField(verbose_name='date joined', auto_now_add=True)
+	last_login			= models.DateTimeField(verbose_name='last login', auto_now=True)
 	is_admin				= models.BooleanField(default=False)
 	is_active				= models.BooleanField(default=True)
 	is_staff				= models.BooleanField(default=False)
-	is_superuser			= models.BooleanField(default=False)
+	is_superuser		= models.BooleanField(default=False)
 
 
 	USERNAME_FIELD = 'email'
