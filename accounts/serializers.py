@@ -49,7 +49,8 @@ class LoginSerializer(serializers.Serializer):
         token, created = Token.objects.get_or_create(user=self.context['user'])
         data = {
             'token': token.key,
-            'username': self.context['user'].username
+            'username': self.context['user'].username,
+            'is_admin': self.context['user'].is_admin
         }
         return data
 

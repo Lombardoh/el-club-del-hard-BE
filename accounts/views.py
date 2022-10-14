@@ -5,7 +5,6 @@ from rest_framework.decorators import api_view
 from accounts.models import Account
 from accounts.serializers import RegistrationSerializer, LoginSerializer, ResetPasswordEmailRequestSerializer
 from rest_framework.authtoken.models import Token
-from django.db.models.query_utils import Q
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
 
@@ -54,6 +53,7 @@ def login_view(request):
             data['response'] = 'El Usuario ingreso exitosamente.'
             data['username'] = account['username']
             data['token'] = account['token']
+            data['is_admin'] = account['is_admin']
             
             return Response(data)
         else:

@@ -1,6 +1,11 @@
-from store.models import Product
-from store.api.serializers import ProductSerializer
+from store.models import Product, Category
+from store.api.serializers import ProductSerializer, CategorySerializer
 from rest_framework import viewsets
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    pagination_class = None
 
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
