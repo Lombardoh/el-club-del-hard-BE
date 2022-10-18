@@ -37,22 +37,22 @@ class LoginSerializer(serializers.Serializer):
     password = serializers.CharField(min_length=8, max_length=64)
 
     def validate(self, data):
-        user = authenticate(username=data['username'], password=data['password'])
-        if not user:
-            raise serializers.ValidationError('Las credenciales no son válidas')
-        
-        self.context['user'] = user
-        
-        return data
+      user = authenticate(username=data['username'], password=data['password'])
+      if not user:
+        raise serializers.ValidationError('Las credenciales no son válidas')
+      
+      self.context['user'] = user
+      
+      return data
     
     def create(self, data):
-        token, created = Token.objects.get_or_create(user=self.context['user'])
-        data = {
-            'token': token.key,
-            'username': self.context['user'].username,
-            'is_admin': self.context['user'].is_admin
-        }
-        return data
+      token, created = Token.objects.get_or_create(user=self.context['user'])
+      data = {
+        'token': token.key,
+        'username': self.context['user'].username,
+        'is_admin': self.context['user'].is_admin
+      }
+      return data
 
 class ResetPasswordEmailRequestSerializer(serializers.Serializer):
   email = serializers.EmailField(min_length=10)
