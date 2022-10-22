@@ -7,7 +7,7 @@ class SerialInline(admin.TabularInline):
   extra = 0
 
 class CategoryAdmin(admin.ModelAdmin):
-  pass
+  list_display = ('pk', 'name', 'principal')
 
 class ProducAdmin(ImportExportModelAdmin):
   list_display = ('pk', 'name', 'alt', 'description', 'price', 'image')

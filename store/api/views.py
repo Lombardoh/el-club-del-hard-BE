@@ -9,8 +9,15 @@ class CategoryViewSet(viewsets.ModelViewSet):
   serializer_class = CategorySerializer
   pagination_class = None
 
+  def get_queryset(self):
+    principal = self.request.query_params.get('principal')
+    if(principal == 'true'):
+      queryset = Category.objects.filter(principal = True)
+    else:
+      queryset = Category.objects.all()
+    return queryset
+
   def update(self, request, pk):
-    print(request.data['action'], pk, request.user.is_admin)
     if(not request.user.is_admin):
       return Response(status=status.HTTP_401_UNAUTHORIZED)
     if(request.data['action'] == 'add'):
